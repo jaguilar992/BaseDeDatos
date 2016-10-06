@@ -1,0 +1,7 @@
+Menu Personas
+Menu Instituciones
+Menu Ciudades
+Menu Paises
+Menu Relaciones
+Guardar cambios
+Salir
