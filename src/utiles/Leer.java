@@ -51,17 +51,7 @@ public class Leer {
 	}
 	
 	////////////////////////////////////////////////////////////////////////// METODOS PUBLICOS
-
-	// A) LEER_INSTITUCION
-	public static Institucion leer_institucion(Contenedor c, boolean pedirID,int ID){
-		return new Institucion(leer(c,pedirID,ID));
-	}
-	//SOBRECARGA LEER_INSTITUCION
-	public static Institucion leer_institucion(Contenedor c){
-		return leer_institucion(c,true,0);
-	}
-
-	// B) LEER_PERSONA
+	// A) LEER_PERSONA
 	public static Persona leer_persona(Contenedor c, boolean pedirID,int ID){
 		General tmp = leer(c,pedirID,ID);
 		String direccion;
@@ -73,6 +63,15 @@ public class Leer {
 	//SOBRECARGA LEER_PERSONA
 	public static Persona leer_persona(Contenedor c){
 		return leer_persona(c,true,0);
+	}
+
+	// B) LEER_INSTITUCION
+	public static Institucion leer_institucion(Contenedor c, boolean pedirID,int ID){
+		return new Institucion(leer(c,pedirID,ID));
+	}
+	//SOBRECARGA LEER_INSTITUCION
+	public static Institucion leer_institucion(Contenedor c){
+		return leer_institucion(c,true,0);
 	}
 
 	// C) LEER_CIUDAD
