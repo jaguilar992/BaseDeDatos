@@ -3,9 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package basededatos;
+package utiles;
 
 
+import clases.Ciudad;
+import basededatos.Contenedor;
+import clases.General;
+import clases.Institucion;
+import clases.Pais;
+import clases.Persona;
+import basededatos.Relacion;
 import java.util.Scanner;
 
 /**

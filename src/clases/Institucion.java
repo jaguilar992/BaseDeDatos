@@ -1,4 +1,4 @@
-package basededatos;
+package clases;
 
 import java.io.Serializable;
 

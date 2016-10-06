@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package basededatos;
+package clases;
 
+import basededatos.Contenedor;
+import basededatos.Relacion;
 import java.io.Serializable;
 
 public class General implements Serializable{
