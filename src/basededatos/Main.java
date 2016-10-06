@@ -121,7 +121,7 @@ public class Main{
 							case 1:
 								System.out.print("\nDesea agregar institucion? (S/N): ");
 								while (c.next().toUpperCase().equals("S")){
-									instituciones.agregarObjeto(Leer.leer_institucion(instituciones,true));
+									instituciones.agregarObjeto(Leer.leer_institucion(instituciones));
 									System.out.print("\nDesea agregar institucion? (S/N): ");
 								}
                                                         //2 MODIFICAR INSTITUCION
@@ -137,7 +137,8 @@ public class Main{
                                                                      if (select==-1) {
                                                                          break;
                                                                      }else if(instituciones.leerObjeto(select)!=null){
-                                                                        instituciones.modificarObjeto(select, Leer.leer_institucion(instituciones,false));
+									int ID = ((Institucion)instituciones.leerObjeto(select)).get_id();
+                                                                        instituciones.modificarObjeto(select, Leer.leer_institucion(instituciones,false,ID));
                                                                         System.out.println(">>Se ha modificado con éxito...");
                                                                         break;
                                                                      }

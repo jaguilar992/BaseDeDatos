@@ -20,12 +20,13 @@ import java.util.Scanner;
  * @author usuario
  */
 public class Leer {
-    	public static Institucion leer_institucion(Contenedor c, boolean check){
+    	public static Institucion leer_institucion(Contenedor c, boolean pedirID,int ID){
 		int id;
 		String nombre;
 		Scanner sc = new Scanner(System.in);
 		System.out.println("---------------------------------------------------");
 		System.out.println("Ingrese los datos de la institucion..."); 
+        if(pedirID){
                 while (true) {                
                     try {
                         System.out.print("ID: ");
@@ -34,9 +35,7 @@ public class Leer {
                         General objetoV = new General();
                         objetoV.set_id(id);
                         
-			if(!check){
-			    break;
-			}else if (!objetoV.existeEn(c)) {
+                        if (!objetoV.existeEn(c)) {
                             break;   
                         }else{
                             System.out.println("-------------------------------------------------");
@@ -48,11 +47,16 @@ public class Leer {
                         System.out.println("ATENCION!!! ID debe ser un numero entero");
                     }                   
                 }
+        }else{
+            id=ID;
+        }
 		System.out.print("Nombre: ");
 		nombre=sc.nextLine();
 		return new Institucion(id,nombre);
 	}
-
+    public static Institucion leer_institucion(Contenedor c){
+        return leer_institucion(c,true,0);
+    }
 
         
     public static Persona leer_persona(Contenedor c, boolean check){
