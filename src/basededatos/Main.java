@@ -302,7 +302,8 @@ public class Main{
 							break;case 2:
                                                         //3 LISTAR RELACIONES --------------- MODIFICAR *********************** Human Readable
 							break;case 3:
-                                                            if (!relacionesP_I.esVacio()){                                                                
+							    relacionesP_I.listarObjetos();
+                                                            /*if (!relacionesP_I.esVacio()){                                                                
                                                                 for (int j = 0; j < instituciones.getLength(); j++) {
                                                                     if (instituciones.leerObjeto(j)!=null) {
                                                                         Institucion leida = (Institucion)instituciones.leerObjeto(j);
@@ -312,7 +313,7 @@ public class Main{
                                                                     }
                                                                 }
                                                                 
-                                                            }else System.out.println("Vacio..."); 
+                                                            }else System.out.println("Vacio..."); */
 							break;
 						}
 						opt3 = Menu.menu("Relaciones");
