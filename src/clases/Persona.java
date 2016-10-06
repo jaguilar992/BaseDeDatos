@@ -11,6 +11,13 @@ public class Persona extends General implements Serializable{
 		super(id, nombre);
 		this.direccion=direccion;
 	}
+	public Persona(General g,String direccion){
+    	super.set_id(g.get_id());
+        super.set_nombre(g.get_nombre());
+		this.direccion=direccion;
+    }
+
+
 
 	@Override
 	public String toString(){

@@ -207,7 +207,7 @@ public class Main{
 							case 1:
 								System.out.print("\nDesea agregar persona? (S/N): ");
 								while (c.next().toUpperCase().equals("S")){
-									personas.agregarObjeto(Leer.leer_persona(personas,true));
+									personas.agregarObjeto(Leer.leer_persona(personas));
 									System.out.print("\nDesea agregar persona? (S/N): ");
 								}
                                                         //2 MODIFICAR PERSONAS
@@ -223,7 +223,8 @@ public class Main{
                                                                      if (select==-1) {
                                                                          break;
                                                                      }else if(personas.leerObjeto(select)!=null){
-                                                                        personas.modificarObjeto(select, Leer.leer_persona(personas,false));
+									int ID = ((Persona)personas.leerObjeto(select)).get_id();
+                                                                        personas.modificarObjeto(select, Leer.leer_persona(personas,false,ID));
                                                                         System.out.println(">>Se ha modificado con éxito...");
                                                                         break;
                                                                      }

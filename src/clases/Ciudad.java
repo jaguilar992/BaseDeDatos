@@ -19,6 +19,10 @@ public class Ciudad extends General implements Serializable {
         super(id,nombre);
         
     }
+    public Ciudad(General g){
+        super.set_id(g.get_id());
+        super.set_nombre(g.get_nombre());
+    }
 
     @Override
     public String toString() {

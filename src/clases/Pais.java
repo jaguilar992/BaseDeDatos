@@ -18,6 +18,10 @@ public class Pais extends General implements Serializable {
         super(id, nombre);
     }
 
+    public Pais(General g){
+    	super.set_id(g.get_id());
+        super.set_nombre(g.get_nombre());
+    }
     
     @Override
     public String toString() {
