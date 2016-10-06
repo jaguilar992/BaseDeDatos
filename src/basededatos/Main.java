@@ -294,7 +294,7 @@ public class Main{
                                                                         personas.listarObjetos();
                                                                         System.out.println("---------------------Instituciones ---------------------");
                                                                         instituciones.listarObjetos();
-									relacionesP_I.agregarObjeto(Leer.leer_relacion(personas,instituciones));
+									relacionesP_I.agregarObjeto(LeerRel.leer_relacion(personas,instituciones));
 									System.out.print("\nDesea agregar relacion? (S/N): ");
 								};
                                                         //2 ELIMINAR RELACION
