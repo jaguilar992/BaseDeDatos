@@ -1,6 +1,6 @@
 package basededatos;
 
-import clases.*;
+//import clases.*; // NO SE USA LOL
 import utiles.*;
 import java.io.EOFException;
 import java.io.FileInputStream;
@@ -111,128 +111,19 @@ public class Main{
 		do{
                         op=Menu.menu("Principal");
 			switch (op) {
-                                
-				//INSTITUCIONES
-				case 2: 
-					int opt1 = Menu.menu("Instituciones");
+                                //PERSONAS
+				case 1:
+					int opt1 = Menu.menu("Personas");
 					while (opt1!=5) {
 						switch (opt1){
-                                                       // 1 AGREGAR INSTITUCIONES
-							case 1:
-								System.out.print("\nDesea agregar institucion? (S/N): ");
-								while (c.next().toUpperCase().equals("S")){
-									instituciones.agregarObjeto(Leer.leer_institucion(instituciones));
-									System.out.print("\nDesea agregar institucion? (S/N): ");
-								}
-                                                        //2 MODIFICAR INSTITUCION
-							break;case 2:
-                                                            if(!instituciones.esVacio()){
-                                                               System.out.println("--------------------------------------------------");
-                                                               System.out.println("# :: ID - Nombre");
-                                                               instituciones.listarObjetos(true);
-                                                               System.out.println("--------------------------------------------------");
-                                                                 while (true){
-                                                                     System.out.print("Ingrese el # de Institución a modificar o -1 para cancelar: ");
-                                                                     int select = c.nextInt();
-                                                                     if (select==-1) {
-                                                                         break;
-                                                                     }else if(instituciones.leerObjeto(select)!=null){
-									int ID = ((Institucion)instituciones.leerObjeto(select)).get_id();
-                                                                        instituciones.modificarObjeto(select, Leer.leer_institucion(instituciones,false,ID));
-                                                                        System.out.println(">>Se ha modificado con éxito...");
-                                                                        break;
-                                                                     }
-                                                                  }                                                        
-                                                            }else{
-                                                                System.out.println("Vacio...");
-                                                            }
-                                                        // 3 ELMINAR INSTITUCION
-							break;case 3:
-                                                            if(!instituciones.esVacio()){
-                                                               System.out.println("--------------------------------------------------");
-                                                               System.out.println("# :: ID - Nombre");
-                                                               instituciones.listarObjetos(true);
-                                                               System.out.println("--------------------------------------------------");
-                                                                 while (true){
-                                                                     System.out.print("Ingrese el # de Institución a eliminar o -1 para cancelar: ");
-                                                                     int select = c.nextInt();
-                                                                     if (select==-1) {
-                                                                         break;
-                                                                     }else if(instituciones.leerObjeto(select)!=null){
-                                                                        Institucion delInst = (Institucion)instituciones.leerObjeto(select);
-                                                                         if (delInst.estaEnRelaciones(relacionesP_I, 2) || delInst.estaEnRelaciones(relacionesI_C, 1)) {
-                                                                             System.out.println("No se eliminó... Hay relaciones pendientes...");
-                                                                             //PREGUNTAR
-                                                                             System.out.print("Desea eliminar institucion "+delInst.get_nombre()+ " y todas las relaciones asociadas? (S/N): ");
-                                                                             String resp = c.next();
-                                                                             if (resp.equals("S") || resp.equals("s")) {
-                                                                                 delInst.borrarOcurenciasEnRelaciones(relacionesP_I, 2);
-                                                                                 delInst.borrarOcurenciasEnRelaciones(relacionesI_C, 1);
-                                                                                 instituciones.eliminarObjeto(select);
-                                                                                 System.out.println(">>Se ha eliminado con éxito...");
-                                                                             }else{
-                                                                                 System.out.println("No se eliminó");
-                                                                             }
-                                                                             
-                                                                         } else {
-                                                                             instituciones.eliminarObjeto(select);
-                                                                             System.out.println(">>Se ha eliminado con éxito...");
-                                                                         }
-                                                                        
-                                                                        break;
-                                                                     }
-                                                                  }
-                                                                                                                               
-                                                            }else{
-                                                                System.out.println("Vacio...");
-                                                            }
-							// 4 LISTAR INSTITUCIONES
-                                                        break;case 4:
-                                                            if(!instituciones.esVacio()){
-                                                                System.out.println("--------------------------------------------------");
-                                                                System.out.println("ID - Nombre");
-								                                instituciones.listarObjetos();
-                                                                System.out.println("--------------------------------------------------");
-                                                            }else System.out.println("Vacio...");
-							break;
-						}
-						opt1 = Menu.menu("Instituciones");
-					}
-				//PERSONAS
-				break; case 1:
-					int opt2 = Menu.menu("Personas");
-					while (opt2!=5) {
-						switch (opt2){
                                                         //1 AGREGAR PERSONAS
 							case 1:
-								System.out.print("\nDesea agregar persona? (S/N): ");
-								while (c.next().toUpperCase().equals("S")){
-									personas.agregarObjeto(Leer.leer_persona(personas));
-									System.out.print("\nDesea agregar persona? (S/N): ");
-								}
+								String title = "persona";
+								FuncionesGenerales.agregarObjeto_general(title, personas, 1);
                                                         //2 MODIFICAR PERSONAS
 							break;case 2:
-                                                            if(!personas.esVacio()){
-                                                               System.out.println("--------------------------------------------------");
-                                                               System.out.println("# :: ID - Nombre - Direccion");
-                                                               personas.listarObjetos(true);
-                                                               System.out.println("--------------------------------------------------");
-                                                                 while (true){
-                                                                     System.out.print("Ingrese el # de Persona a modificar o -1 para cancelar: ");
-                                                                     int select = c.nextInt();
-                                                                     if (select==-1) {
-                                                                         break;
-                                                                     }else if(personas.leerObjeto(select)!=null){
-									int ID = ((Persona)personas.leerObjeto(select)).get_id();
-                                                                        personas.modificarObjeto(select, Leer.leer_persona(personas,false,ID));
-                                                                        System.out.println(">>Se ha modificado con éxito...");
-                                                                        break;
-                                                                     }
-                                                                  }
-                                                                                                                               
-                                                            }else{
-                                                                System.out.println("Vacio...");
-                                                            }
+                                                            title = "Persona";
+                                                            FuncionesGenerales.modificarObjeto_general(title, personas,1,1);
                                                         //3 ELIMINAR PERSONA
 							break;case 3:
                                                             if(!personas.esVacio()){
@@ -240,89 +131,242 @@ public class Main{
                                                                System.out.println("# :: ID - Nombre");
                                                                personas.listarObjetos(true);
                                                                System.out.println("--------------------------------------------------");
-                                                                 while (true){
-                                                                     System.out.print("Ingrese el # de Persona a eliminar o -1 para cancelar: ");
-                                                                     int select = c.nextInt();
-                                                                     if (select==-1) {
-                                                                         break;
-                                                                     }else if(personas.leerObjeto(select)!=null){
-                                                                        Persona delPers = (Persona)personas.leerObjeto(select);
-                                                                         if (delPers.estaEnRelaciones(relacionesP_I,1)|| delPers.estaEnRelaciones(relacionesP_C,1)) {
-                                                                             System.out.println("No se eliminó... Hay relaciones pendientes...");
-                                                                             System.out.print("Desea eliminar a "+delPers.get_nombre()+ " y todas las relaciones asociadas? (S/N): ");
-                                                                             String resp=c.next();
-                                                                             if (resp.equals("S") || resp.equals("s")) {
-                                                                                 delPers.borrarOcurenciasEnRelaciones(relacionesP_I, 1);
-                                                                                 delPers.borrarOcurenciasEnRelaciones(relacionesP_C, 1);
-                                                                                 personas.eliminarObjeto(select);
-                                                                                 System.out.println(">>Se ha eliminado con éxito...");
-                                                                             }else{
-                                                                                 System.out.println("No se eliminó");
-                                                                             }
-                                                                         } else {
-                                                                             personas.eliminarObjeto(select);
-                                                                             System.out.println(">>Se ha eliminado con éxito...");
-                                                                         }
-                                                                        
-                                                                        break;
-                                                                     }
-                                                                  }                                                                  
+                                                               FuncionesGenerales.eliminarPersona(personas, relacionesP_I, relacionesP_C);                                                                    
                                                             }else{
                                                                 System.out.println("Vacio...");
                                                             }
                                                         //4 LISTAR PERSONAS
 							break;case 4:
-                                                            if (!personas.esVacio()){
-								System.out.println("--------------------------------------------------");
-                                                                System.out.println("ID - Nombre - Direccion");
-								personas.listarObjetos();
-                                                                System.out.println("--------------------------------------------------");
-                                                            }else System.out.println("Vacio...");
+                                                            FuncionesGenerales.listarObjeto_general(personas, 1);
 							break;
 						}
-						opt2 = Menu.menu("Personas");
+						opt1 = Menu.menu("Personas");
 					}
-				//RELACIONES
-				break; case 3:
-					int opt3 = Menu.menu("Relaciones");
-					while (opt3!=4) {
-						switch (opt3){
-                                                        //1 AGREGAR RELACIONES
+                                       
+				       //INSTITUCIONES
+				break; case 2: 
+					int opt2 = Menu.menu("Instituciones");
+					while (opt2!=5) {
+						switch (opt2){
+                                                       // 1 AGREGAR INSTITUCIONES
 							case 1:
-								System.out.print("\nDesea agregar relacion? (S/N): ");
-								while (c.next().toUpperCase().equals("S")){
-                                                                        System.out.println("------------------------Personas------------------------");
-                                                                        personas.listarObjetos();
-                                                                        System.out.println("---------------------Instituciones ---------------------");
-                                                                        instituciones.listarObjetos();
-									relacionesP_I.agregarObjeto(LeerRel.leer_relacion(personas,instituciones,1));
-									System.out.print("\nDesea agregar relacion? (S/N): ");
-								};
-                                                        //2 ELIMINAR RELACION
+                                                            String title = "intitucion";
+                                                            FuncionesGenerales.agregarObjeto_general(title, instituciones, 2);
+                                                        //2 MODIFICAR INSTITUCION
 							break;case 2:
-                                                        //3 LISTAR RELACIONES --------------- MODIFICAR *********************** Human Readable
+                                                             title = "Institucion";
+                                                            FuncionesGenerales.modificarObjeto_general(title, instituciones,2,2);
+                                                        // 3 ELMINAR INSTITUCION
 							break;case 3:
-							    //relacionesP_I.listarObjetos();
-							    Relacion.listarGroupRelaciones(relacionesP_I, personas, instituciones);
-							    Relacion.listarAllRelaciones(relacionesP_I, personas, instituciones);
-							    
-                                                            /*if (!relacionesP_I.esVacio()){                                                                
-                                                                for (int j = 0; j < instituciones.getLength(); j++) {
-                                                                    if (instituciones.leerObjeto(j)!=null) {
-                                                                        Institucion leida = (Institucion)instituciones.leerObjeto(j);
-                                                                        if (leida.estaEnRelaciones(relacionesP_I, 1)) {
-                                                                            
-                                                                        }
-                                                                    }
-                                                                }
-                                                                
-                                                            }else System.out.println("Vacio..."); */
+                                                            if(!instituciones.esVacio()){
+                                                               System.out.println("--------------------------------------------------");
+                                                               System.out.println("# :: ID - Nombre");
+                                                               instituciones.listarObjetos(true);
+                                                               System.out.println("--------------------------------------------------");
+                                                               FuncionesGenerales.eliminarInstitucion(instituciones, relacionesP_I, relacionesI_C);  
+                                                                                                                               
+                                                            }else{
+                                                                System.out.println("Vacio...");
+                                                            }
+							// 4 LISTAR INSTITUCIONES
+                                                        break;case 4:
+                                                            FuncionesGenerales.listarObjeto_general(instituciones, 2);
 							break;
 						}
-						opt3 = Menu.menu("Relaciones");
+						opt2 = Menu.menu("Instituciones");
 					}
-					break; case 4:
-					//GUARDAR TODO
+				      //CIUDADES
+				break;case 3:
+                                        int opt3 = Menu.menu("Ciudades");
+					while (opt3!=5) {
+						switch (opt3){
+                                                       // 1 AGREGAR CIUDAD
+							case 1:
+                                                            String title = "ciudad";
+                                                            FuncionesGenerales.agregarObjeto_general(title, ciudades, 3);
+                                                        //2 MODIFICAR CIUDAD
+							break;case 2:
+                                                             title = "Ciudad";
+                                                            FuncionesGenerales.modificarObjeto_general(title, ciudades, 3, 2);
+                                                        // 3 ELMINAR CIUDAD
+							break;case 3:
+                                                            if(!ciudades.esVacio()){
+                                                               System.out.println("--------------------------------------------------");
+                                                               System.out.println("# :: ID - Nombre");
+                                                               ciudades.listarObjetos(true);
+                                                               System.out.println("--------------------------------------------------");
+                                                               FuncionesGenerales.eliminarCiudad(ciudades, relacionesI_C, relacionesC_P);  
+                                                                                                                               
+                                                            }else{
+                                                                System.out.println("Vacio...");
+                                                            }
+							// 4 LISTAR CIUDAD
+                                                        break;case 4:
+                                                            FuncionesGenerales.listarObjeto_general(ciudades, 2);
+							break;
+						}
+						opt3 = Menu.menu("Ciudades");
+					}
+                                      //PAISES
+                                break;case 4:
+                                        int opt4 = Menu.menu("Paises");
+					while (opt4!=5) {
+						switch (opt4){
+                                                       // 1 AGREGAR CIUDAD
+							case 1:
+                                                            String title = "pais";
+                                                            FuncionesGenerales.agregarObjeto_general(title, paises, 4);
+                                                        //2 MODIFICAR CIUDAD
+							break;case 2:
+                                                             title = "Pais";
+                                                            FuncionesGenerales.modificarObjeto_general(title, paises, 4, 2);
+                                                        // 3 ELMINAR CIUDAD
+							break;case 3:
+                                                            if(!ciudades.esVacio()){
+                                                               System.out.println("--------------------------------------------------");
+                                                               System.out.println("# :: ID - Nombre");
+                                                               paises.listarObjetos(true);
+                                                               System.out.println("--------------------------------------------------");
+                                                               FuncionesGenerales.eliminarPais(paises, relacionesC_P);  
+                                                                                                                               
+                                                            }else{
+                                                                System.out.println("Vacio...");
+                                                            }
+							// 4 LISTAR CIUDAD
+                                                        break;case 4:
+                                                            FuncionesGenerales.listarObjeto_general(paises, 2);
+							break;
+						}
+						opt4 = Menu.menu("Ciudades");
+					}
+                                      //RELACIONES
+                                break;case 5:
+					int opt5 = Menu.menu("Relaciones");
+					while (opt5!=5) {
+						switch (opt5){
+                                                        //PERSONAS-INSTITUCIONES
+							case 1:
+                                                            int opt5_1 = Menu.menu("Personas-Instituciones");
+                                                            while(opt5_1!=4){
+								switch(opt5_1){
+                                                                    //1 AGREGAR RELACIONES
+                                                                    case 1:                                                                        
+                                                                        FuncionesGenerales.agregarRelacion_general(personas, instituciones, relacionesP_I, 1);
+                                                                    //2 ELIMINAR RELACION
+                                                                    break;case 2:
+                                                                        FuncionesGenerales.eliminarRelacion_general(relacionesP_I, 1);
+                                                                    //3 LISTAR RELACIONES --------------- MODIFICAR *********************** Human Readable
+                                                                    break;case 3:
+                                                                        
+                                                                        relacionesP_I.listarObjetos();
+                                                                        /*if (!relacionesP_I.esVacio()){                                                                
+                                                                            for (int j = 0; j < instituciones.getLength(); j++) {
+                                                                                if (instituciones.leerObjeto(j)!=null) {
+                                                                                    Institucion leida = (Institucion)instituciones.leerObjeto(j);
+                                                                                    if (leida.estaEnRelaciones(relacionesP_I, 1)) {
+                                                                            
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                
+                                                                        }else System.out.println("Vacio..."); */
+                                                                     break;
+                                                                }
+                                                                opt5_1 = Menu.menu("Personas-Instituciones");
+                                                            }  
+                                                             //PERSONAS-CIUDADES 
+                                                        break;case 2:
+                                                            int opt5_2 = Menu.menu("Personas-Ciudades");
+                                                            while(opt5_2!=4){
+								switch(opt5_2){
+                                                                    //1 AGREGAR RELACIONES
+                                                                    case 1:
+                                                                        FuncionesGenerales.agregarRelacion_general(personas, ciudades, relacionesP_C, 2);
+                                                                    //2 ELIMINAR RELACION
+                                                                    break;case 2:
+                                                                        FuncionesGenerales.eliminarRelacion_general(relacionesP_C, 2);
+                                                                    //3 LISTAR RELACIONES --------------- MODIFICAR *********************** Human Readable
+                                                                    break;case 3:
+                                                                        relacionesP_C.listarObjetos();
+                                                                        /*if (!relacionesP_I.esVacio()){                                                                
+                                                                            for (int j = 0; j < instituciones.getLength(); j++) {
+                                                                                if (instituciones.leerObjeto(j)!=null) {
+                                                                                    Institucion leida = (Institucion)instituciones.leerObjeto(j);
+                                                                                    if (leida.estaEnRelaciones(relacionesP_I, 1)) {
+                                                                            
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                
+                                                                        }else System.out.println("Vacio..."); */
+                                                                     break;
+                                                                }
+                                                                opt5_2 = Menu.menu("Personas-Ciudades");
+                                                            }
+                                                              //INSTITUCIONES-CIUDADES
+                                                        break;case 3:
+                                                            int opt5_3 = Menu.menu("Instituciones-Ciudades");
+                                                            while(opt5_3!=4){
+								switch(opt5_3){
+                                                                    //1 AGREGAR RELACIONES
+                                                                    case 1:                                                                        
+                                                                        FuncionesGenerales.agregarRelacion_general(instituciones, ciudades, relacionesI_C, 3);
+                                                                    //2 ELIMINAR RELACION
+                                                                    break;case 2:
+                                                                        FuncionesGenerales.eliminarRelacion_general(relacionesI_C, 3);
+                                                                    //3 LISTAR RELACIONES --------------- MODIFICAR *********************** Human Readable
+                                                                    break;case 3:
+                                                                        relacionesI_C.listarObjetos();
+                                                                        /*if (!relacionesP_I.esVacio()){                                                                
+                                                                            for (int j = 0; j < instituciones.getLength(); j++) {
+                                                                                if (instituciones.leerObjeto(j)!=null) {
+                                                                                    Institucion leida = (Institucion)instituciones.leerObjeto(j);
+                                                                                    if (leida.estaEnRelaciones(relacionesP_I, 1)) {
+                                                                            
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                
+                                                                        }else System.out.println("Vacio..."); */
+                                                                     break;
+                                                                }
+                                                                opt5_3 = Menu.menu("Instituciones-Ciudades");
+                                                            }
+                                                            //CIUDADES-PAISES
+                                                        break;case 4:
+                                                            int opt5_4 = Menu.menu("Ciudades-Paises");
+                                                            while(opt5_4!=4){
+								switch(opt5_4){
+                                                                    //1 AGREGAR RELACIONES
+                                                                    case 1:
+                                                                        FuncionesGenerales.agregarRelacion_general(ciudades, paises, relacionesC_P, 4);
+                                                                    //2 ELIMINAR RELACION
+                                                                    break;case 2:
+                                                                        FuncionesGenerales.eliminarRelacion_general(relacionesC_P, 4);
+                                                                    //3 LISTAR RELACIONES --------------- MODIFICAR *********************** Human Readable
+                                                                    break;case 3:
+                                                                        relacionesC_P.listarObjetos();
+                                                                        /*if (!relacionesP_I.esVacio()){                                                                
+                                                                            for (int j = 0; j < instituciones.getLength(); j++) {
+                                                                                if (instituciones.leerObjeto(j)!=null) {
+                                                                                    Institucion leida = (Institucion)instituciones.leerObjeto(j);
+                                                                                    if (leida.estaEnRelaciones(relacionesP_I, 1)) {
+                                                                            
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                
+                                                                        }else System.out.println("Vacio..."); */
+                                                                     break;
+                                                                }
+                                                                opt5_4 = Menu.menu("Ciudades-Paises");
+                                                            }
+                                                        break;    
+                                                }
+						opt5 = Menu.menu("Relaciones");
+					}
+				break; case 6:case 7:
+				//GUARDAR TODO
                                         
                                         FileOutputStream p2_new = new FileOutputStream("Personas.bin");
                                         FileOutputStream i2_new = new FileOutputStream("Instituciones.bin");
@@ -417,7 +461,7 @@ public class Main{
 					break;
 					
 			}
-		}while(op!=4);
+		}while(op!=7);
                 
                 // FIN MENUS
         
