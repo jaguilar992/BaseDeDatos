@@ -24,7 +24,7 @@ public class Menu{
 		dictionary.put("personas-instituciones", "MenuRelacionesGeneral");
 		dictionary.put("personas-ciudades", "MenuRelacionesGeneral");
 		dictionary.put("instituciones-ciudades", "MenuRelacionesGeneral");
-		dictionary.put("paises-ciudades", "MenuRelacionesGeneral");
+		dictionary.put("ciudades-paises", "MenuRelacionesGeneral");
 
 		// OPCION
 		int opcion=0;
