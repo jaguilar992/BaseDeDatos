@@ -295,14 +295,17 @@ public class Main{
                                                                         personas.listarObjetos();
                                                                         System.out.println("---------------------Instituciones ---------------------");
                                                                         instituciones.listarObjetos();
-									relacionesP_I.agregarObjeto(LeerRel.leer_relacion(personas,instituciones));
+									relacionesP_I.agregarObjeto(LeerRel.leer_relacion(personas,instituciones,1));
 									System.out.print("\nDesea agregar relacion? (S/N): ");
 								};
                                                         //2 ELIMINAR RELACION
 							break;case 2:
                                                         //3 LISTAR RELACIONES --------------- MODIFICAR *********************** Human Readable
 							break;case 3:
-							    relacionesP_I.listarObjetos();
+							    //relacionesP_I.listarObjetos();
+							    Relacion.listarGroupRelaciones(relacionesP_I, personas, instituciones);
+							    Relacion.listarAllRelaciones(relacionesP_I, personas, instituciones);
+							    
                                                             /*if (!relacionesP_I.esVacio()){                                                                
                                                                 for (int j = 0; j < instituciones.getLength(); j++) {
                                                                     if (instituciones.leerObjeto(j)!=null) {

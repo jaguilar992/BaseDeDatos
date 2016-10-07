@@ -18,12 +18,12 @@
 	Contenedor relacionesC_P;	
 ```
 
-|Contenedor Relación:|id1|id2|Contenedor1|Contenedor2|
-|---|---|---|---|---|
-|relacionesP_I|Persona|Institucion|personas|instituciones|
-|relacionesP_C|Persona|Ciudad|personas|ciudades|
-|relacionesI_C|Institucion|Ciudad|instituciones|ciudades|
-|realcionesC_P|Ciudad|Pais|ciudades|paises|
+|#|Contenedor Relación:|id1|id2|Contenedor1|Contenedor2|
+|---|---|---|---|---|---|
+|1|relacionesP_I|Persona|Institucion|personas|instituciones|
+|2|relacionesP_C|Persona|Ciudad|personas|ciudades|
+|3|relacionesI_C|Institucion|Ciudad|instituciones|ciudades|
+|4|realcionesC_P|Ciudad|Pais|ciudades|paises|
 
 
 ### Lectura de Objetos (Agregar a contenedor)
@@ -82,17 +82,20 @@ import clases.*;
 import utiles.LeerRel;
 
 // Devuelve una Relacion entre persona e institución
-LeerRel.leer_relacion(personas, instituciones);
+LeerRel.leer_relacion(personas, instituciones,1);
 
 // Devuelve una Relacion entre persona y ciudad
-LeerRel.leer_relacion(personas, ciudades);
+LeerRel.leer_relacion(personas, ciudades,2);
 
 // Devuelve una Relacion entre institución y ciudad
-LeerRel.leer_relacion(instituciones, ciudades);
+LeerRel.leer_relacion(instituciones, ciudades,3);
 
 // Devuelve una Relacion entre ciudad y país // Se añade al contenedor
-LeerRel.leer_relacion(ciudades, paises);
+LeerRel.leer_relacion(ciudades, paises,4);
 relacionesC_P.agregarObjeto(nuevoObjeto);
+
+// Los enteros pasados por parametros indicaran los titulos de ayuda al usuario
+// Según sea la relacion entre objetos a establecer (Ver Tabla)
 ```
 >Se envían los contenedores con el objetivo de verificar si existen los ID's que el usuario ingresa
 
@@ -106,6 +109,10 @@ personas.getLength();
 
 //Imprime todos los objetos del contenedor que no son null
 relacionesC_P.listarObjetos();
+
+// UTIL: Cuando se necesita eliminar objetos, al añadir el parámetro true, se imprime el número de cubeta
+relacionesC_P.listarObjetos(true);
+
 ```
 
 ### Métodos de la clase General
@@ -197,4 +204,51 @@ ciudad.existe(ciudades)
 
 ````
 
+### Impresion de Relaciones
+>Existen 2 formas de imprimir las relaciones en un contenedor.
+
+**1. De forma desordenada:**
+#### ```Relacion.listarAllRelaciones```
+>Tal como se han agregado, indicando el número de cubeta en el que están.
+Este método se usará cuando se le consulte al usuario por la relacion que desea eliminar
+```java
+package basededatos;
+Relacion.listarAllRelaciones(relacionesP_I, personas, instituciones);
+```
+Un ejemplo de la salida:
+```text
+--------------------------------------------------
+Relaciones en Contenedor
+--------------------------------------------------
+0::  2 - Daniel Figueroa - Guatemala  -->  1 - Youtube
+1::  3 - Miguel Solorzano - Haiti  -->  1 - Youtube
+2::  3 - Miguel Solorzano - Haiti  -->  2 - Google
+```
+
+**2. Agrupada según el contenedor2 en cada relación (Ver tabla):**
+#### ```Relacion.listarGroupRelaciones```
+> Es decir, si se envía a imprimir ```relacionesP_I``` (Personas, e instituciones)
+Se agruparían por Institución.
+
+```java
+package basededatos;
+Relacion.listarGroupRelaciones(relacionesP_I, personas, instituciones);
+```
+Un ejemplo de la salida:
+```text
+--------------------------------------------------
+Youtube
+--------------------------------------------------
+2 - Daniel Figueroa - Guatemala
+3 - Miguel Solorzano - Haiti
+--------------------------------------------------
+--------------------------------------------------
+Google
+--------------------------------------------------
+3 - Miguel Solorzano - Haiti
+--------------------------------------------------
+```
+> Nótese que los contenedores contienen las mismas relaciones entre objetos. Lo único que cambia es la forma de imprimirlos.
+
+>Ambos métodos son **static**, métodos de clase (Relacion) y no de instancia.
 #####
