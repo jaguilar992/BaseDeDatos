@@ -266,16 +266,19 @@ public class FuncionesGenerales {
     
     public static void eliminarRelacion_general(Contenedor relacion){
         Scanner c = new Scanner(System.in);      
-              
             while (true){
                 System.out.print("Ingrese el # de Relacion a eliminar o -1 para cancelar: ");
-                int select = c.nextInt();
-                if (select==-1) {
-                    break;
-                }else if (relacion.leerObjeto(select)!=null){
-		    relacion.eliminarObjeto(select);
-		    System.out.println(">>Se ha eliminado con éxito...");
-		    break;
+                try{
+		    int select = Integer.parseInt(c.next());
+		    if (select==-1) {
+                        break;
+                    }else if (relacion.leerObjeto(select)!=null){
+			relacion.eliminarObjeto(select);
+			System.out.println(">>Se ha eliminado con éxito...");
+			break;
+		    }
+		}catch(NumberFormatException e){
+		    System.out.println("¡ALERTA! Debe ingresar un numero ENTERO");
 		}
             }                                               
         
