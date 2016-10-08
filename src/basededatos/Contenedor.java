@@ -19,7 +19,7 @@ public class Contenedor implements Serializable{
 	}
         
         public boolean modificarObjeto(int index, Object objeto){
-            if (index>=0){
+            if (index>=0 && index<N){
                 if (this.contenedor[index]!=null){
                     this.contenedor[index]=objeto;
                     return true;
@@ -28,8 +28,12 @@ public class Contenedor implements Serializable{
             return false;
         }
                 
-	public void eliminarObjeto(int index){
+	public boolean eliminarObjeto(int index){
+	    if (index>=0 && index<N) {
 		this.contenedor[index]=null;
+		return true;
+	    }
+	    return false;
 	}
 	public int buscarObjeto(Object objeto){
 		for (int i=0; i<this.contenedor.length; i++) {

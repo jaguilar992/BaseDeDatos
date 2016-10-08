@@ -1,0 +1,79 @@
+commit f4e6a0d3dc6e543756bd6bce4f97a00d9558002d
+Author: Antonio <jaguilar992@gmail.com>
+Date:   Thu Oct 6 22:46:59 2016 -0600
+
+    Añadida comprobacion en Listar (Vacio?)
+
+commit e62e9017deb811701a32a4a637a86e32f8699e6f
+Author: Antonio <jaguilar992@gmail.com>
+Date:   Thu Oct 6 22:06:53 2016 -0600
+
+    Agregados:
+    Funciones Generales
+    Flujo del Programa (Main)
+
+commit d3f7647e55aad37481208fb88ee7532a34b7494e
+Author: Antonio <jaguilar992@gmail.com>
+Date:   Thu Oct 6 21:47:36 2016 -0600
+
+    LeerRel: Agregadas Etiquetas en lectura de relacion.
+    Label1: Persona, Institucion
+    Label2: Persona, Ciudad
+    Label3: Institucion, Ciudad
+    Label4: Ciudad, Pais
+    
+    Relacion: Agragados metodos de listado de relacion
+    ver README.md
+
+commit 67e13f06089d28abdcba84130d5caafbc30b892f
+Author: Antonio <jaguilar992@gmail.com>
+Date:   Thu Oct 6 21:29:04 2016 -0600
+
+    Fixed Menu
+
+commit c2a151d5b91b10d78588a033b680b547e7f79a19
+Author: Antonio <jaguilar992@gmail.com>
+Date:   Thu Oct 6 08:26:01 2016 -0600
+
+    Creado README
+
+commit 6dc93a5b24b3945c5d06c12d7ca83fcfb02aa043
+Author: Jose Antonio Aguilar <jaguilar992@gmail.com>
+Date:   Wed Oct 5 21:59:22 2016 -0600
+
+    Create README.md
+
+commit 5a8fbd4cdd31de6dd083520bc8ae0d777d5e54ef
+Author: Antonio <jaguilar992@gmail.com>
+Date:   Wed Oct 5 21:40:30 2016 -0600
+
+    Leer: Creado metodo leer General, Sobrecarga de metodos, para distinguir cuando se hace una modificacion
+
+commit 8295a7f8d846bdf6465ccd37f5997f452b8c133f
+Author: Antonio <jaguilar992@gmail.com>
+Date:   Wed Oct 5 21:22:55 2016 -0600
+
+    Leer: Creado metodo leer General, Sobrecarga de metodos, para distinguir cuando se hace una modificacion
+
+commit 33ecf35bf30a040f0a4997390177889d6b61c63b
+Author: Antonio <jaguilar992@gmail.com>
+Date:   Wed Oct 5 19:48:47 2016 -0600
+
+    Creada LeerRel
+    Modificado Leer para evitar cambio de ID en modificacion
+
+commit c163892cebc8018425690a2296b66dae95edf1b0
+Author: Antonio <jaguilar992@gmail.com>
+Date:   Wed Oct 5 19:38:18 2016 -0600
+
+commit e8b1b7ce6612f34f1a4dce9738db5fc0b65d5c3d
+Author: Antonio <jaguilar992@gmail.com>
+Date:   Wed Oct 5 19:07:13 2016 -0600
+
+    Restructuracion de Paquetes
+
+commit 81fc14ffb8a826e6a58d7616d7fccf01e5b4be97
+Author: Antonio <jaguilar992@gmail.com>
+Date:   Wed Oct 5 18:43:12 2016 -0600
+
+    Inicio

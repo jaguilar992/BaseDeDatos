@@ -195,7 +195,7 @@ public class Main{
                                                                System.out.println("# :: ID - Nombre");
                                                                ciudades.listarObjetos(true);
                                                                System.out.println("--------------------------------------------------");
-                                                               FuncionesGenerales.eliminarCiudad(ciudades, relacionesI_C, relacionesC_P);  
+                                                               FuncionesGenerales.eliminarCiudad(ciudades, relacionesP_C, relacionesI_C, relacionesC_P);  
                                                                                                                                
                                                             }else{
                                                                 System.out.println("Vacio...");
@@ -237,7 +237,7 @@ public class Main{
                                                             FuncionesGenerales.listarObjeto_general(paises, 2);
 							break;
 						}
-						opt4 = Menu.menu("Ciudades");
+						opt4 = Menu.menu("Paises");
 					}
                                       //RELACIONES
                                 break;case 5:
@@ -254,22 +254,18 @@ public class Main{
                                                                         FuncionesGenerales.agregarRelacion_general(personas, instituciones, relacionesP_I, 1);
                                                                     //2 ELIMINAR RELACION
                                                                     break;case 2:
-                                                                        FuncionesGenerales.eliminarRelacion_general(relacionesP_I, 1);
-                                                                    //3 LISTAR RELACIONES --------------- MODIFICAR *********************** Human Readable
-                                                                    break;case 3:
+                                                                        if(!relacionesP_I.esVacio()){
+                                                                        Relacion.listarAllRelaciones(relacionesP_I, personas, instituciones);
+                                                                        FuncionesGenerales.eliminarRelacion_general(relacionesP_I);
+                                                                        }else{
+                                                                             System.out.println("Vacio...");
+                                                                        }
                                                                         
-                                                                        relacionesP_I.listarObjetos();
-                                                                        /*if (!relacionesP_I.esVacio()){                                                                
-                                                                            for (int j = 0; j < instituciones.getLength(); j++) {
-                                                                                if (instituciones.leerObjeto(j)!=null) {
-                                                                                    Institucion leida = (Institucion)instituciones.leerObjeto(j);
-                                                                                    if (leida.estaEnRelaciones(relacionesP_I, 1)) {
-                                                                            
-                                                                                    }
-                                                                                }
-                                                                            }
-                                                                
-                                                                        }else System.out.println("Vacio..."); */
+                                                                    //3 LISTAR RELACIONES --------------- MODIFICAR *********************** Human Readable
+                                                                    break;case 3:                                                                        
+                                                                        if (!relacionesP_I.esVacio()){                                                                
+                                                                            Relacion.listarGroupRelaciones(relacionesP_I, personas, instituciones);
+                                                                        }else System.out.println("Vacio..."); 
                                                                      break;
                                                                 }
                                                                 opt5_1 = Menu.menu("Personas-Instituciones");
@@ -284,21 +280,17 @@ public class Main{
                                                                         FuncionesGenerales.agregarRelacion_general(personas, ciudades, relacionesP_C, 2);
                                                                     //2 ELIMINAR RELACION
                                                                     break;case 2:
-                                                                        FuncionesGenerales.eliminarRelacion_general(relacionesP_C, 2);
+                                                                        if(!relacionesP_C.esVacio()){
+                                                                        Relacion.listarAllRelaciones(relacionesP_C, personas, ciudades);
+                                                                        FuncionesGenerales.eliminarRelacion_general(relacionesP_C);
+                                                                        }else{
+                                                                             System.out.println("Vacio...");
+                                                                        }
                                                                     //3 LISTAR RELACIONES --------------- MODIFICAR *********************** Human Readable
                                                                     break;case 3:
-                                                                        relacionesP_C.listarObjetos();
-                                                                        /*if (!relacionesP_I.esVacio()){                                                                
-                                                                            for (int j = 0; j < instituciones.getLength(); j++) {
-                                                                                if (instituciones.leerObjeto(j)!=null) {
-                                                                                    Institucion leida = (Institucion)instituciones.leerObjeto(j);
-                                                                                    if (leida.estaEnRelaciones(relacionesP_I, 1)) {
-                                                                            
-                                                                                    }
-                                                                                }
-                                                                            }
-                                                                
-                                                                        }else System.out.println("Vacio..."); */
+                                                                         if (!relacionesP_C.esVacio()){                                                                
+                                                                            Relacion.listarGroupRelaciones(relacionesP_C, personas, ciudades);
+                                                                        }else System.out.println("Vacio..."); 
                                                                      break;
                                                                 }
                                                                 opt5_2 = Menu.menu("Personas-Ciudades");
@@ -313,21 +305,17 @@ public class Main{
                                                                         FuncionesGenerales.agregarRelacion_general(instituciones, ciudades, relacionesI_C, 3);
                                                                     //2 ELIMINAR RELACION
                                                                     break;case 2:
-                                                                        FuncionesGenerales.eliminarRelacion_general(relacionesI_C, 3);
+                                                                        if(!relacionesI_C.esVacio()){
+                                                                        Relacion.listarAllRelaciones(relacionesI_C, instituciones, ciudades);
+                                                                        FuncionesGenerales.eliminarRelacion_general(relacionesI_C);
+                                                                        }else{
+                                                                             System.out.println("Vacio...");
+                                                                        }
                                                                     //3 LISTAR RELACIONES --------------- MODIFICAR *********************** Human Readable
                                                                     break;case 3:
-                                                                        relacionesI_C.listarObjetos();
-                                                                        /*if (!relacionesP_I.esVacio()){                                                                
-                                                                            for (int j = 0; j < instituciones.getLength(); j++) {
-                                                                                if (instituciones.leerObjeto(j)!=null) {
-                                                                                    Institucion leida = (Institucion)instituciones.leerObjeto(j);
-                                                                                    if (leida.estaEnRelaciones(relacionesP_I, 1)) {
-                                                                            
-                                                                                    }
-                                                                                }
-                                                                            }
-                                                                
-                                                                        }else System.out.println("Vacio..."); */
+                                                                         if (!relacionesI_C.esVacio()){                                                                
+                                                                            Relacion.listarGroupRelaciones(relacionesI_C, instituciones, ciudades);
+                                                                        }else System.out.println("Vacio..."); 
                                                                      break;
                                                                 }
                                                                 opt5_3 = Menu.menu("Instituciones-Ciudades");
@@ -342,21 +330,17 @@ public class Main{
                                                                         FuncionesGenerales.agregarRelacion_general(ciudades, paises, relacionesC_P, 4);
                                                                     //2 ELIMINAR RELACION
                                                                     break;case 2:
-                                                                        FuncionesGenerales.eliminarRelacion_general(relacionesC_P, 4);
+                                                                        if(!relacionesC_P.esVacio()){
+                                                                        Relacion.listarAllRelaciones(relacionesC_P, ciudades, paises);
+                                                                        FuncionesGenerales.eliminarRelacion_general(relacionesC_P);
+                                                                        }else{
+                                                                             System.out.println("Vacio...");
+                                                                        }
                                                                     //3 LISTAR RELACIONES --------------- MODIFICAR *********************** Human Readable
                                                                     break;case 3:
-                                                                        relacionesC_P.listarObjetos();
-                                                                        /*if (!relacionesP_I.esVacio()){                                                                
-                                                                            for (int j = 0; j < instituciones.getLength(); j++) {
-                                                                                if (instituciones.leerObjeto(j)!=null) {
-                                                                                    Institucion leida = (Institucion)instituciones.leerObjeto(j);
-                                                                                    if (leida.estaEnRelaciones(relacionesP_I, 1)) {
-                                                                            
-                                                                                    }
-                                                                                }
-                                                                            }
-                                                                
-                                                                        }else System.out.println("Vacio..."); */
+                                                                         if (!relacionesC_P.esVacio()){                                                                
+                                                                            Relacion.listarGroupRelaciones(relacionesC_P, ciudades, paises);
+                                                                        }else System.out.println("Vacio..."); 
                                                                      break;
                                                                 }
                                                                 opt5_4 = Menu.menu("Ciudades-Paises");
