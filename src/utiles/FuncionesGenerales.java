@@ -12,6 +12,8 @@ import java.util.Scanner;
  * @author perdonal
  */
 public class FuncionesGenerales {
+    private final static String ENTEROALERTA ="¡ALERTA! # debe ser un numero entero...\nIntente de nuevo...";
+    
     public static void agregarObjeto_general(String title, Contenedor contenedor1, int tipoContenedor){
         Scanner c = new Scanner(System.in);
         System.out.print("\nDesea agregar "+title+"? (S/N): ");
@@ -47,8 +49,9 @@ public class FuncionesGenerales {
             contenedor1.listarObjetos(true);
             System.out.println("--------------------------------------------------");
             while (true){
+              try{
                 System.out.print("Ingrese el # de "+title+" a modificar o -1 para cancelar: ");
-                int select = c.nextInt();
+                int select = Integer.parseInt(c.nextLine()) ;
                 if (select==-1) {
                     break;
                 }else if(contenedor1.leerObjeto(select)!=null){
@@ -70,18 +73,25 @@ public class FuncionesGenerales {
                         System.out.println(">>Se ha modificado con éxito...");
                         break;
                     }
+              } catch (NumberFormatException e) {
+                    System.out.println(ENTEROALERTA);
+                }  
             }
+                
+                
         }else{
                     System.out.println("Vacio...");
         }
+        
     }
      
     
     public static void eliminarPersona(Contenedor contenedor1, Contenedor relacionesP_I, Contenedor relacionesP_C){
         Scanner c = new Scanner(System.in);
         while (true){
+          try{
             System.out.print("Ingrese el # de Persona a eliminar o -1 para cancelar: ");
-            int select = c.nextInt();
+            int select = Integer.parseInt(c.nextLine()) ;
             if (select==-1) {
                 break;
             }else if(contenedor1.leerObjeto(select)!=null){
@@ -104,6 +114,9 @@ public class FuncionesGenerales {
                 }
             break;
             }
+          } catch (NumberFormatException e) {
+		System.out.println(ENTEROALERTA);
+            }  
         }
     } 
     
@@ -111,8 +124,9 @@ public class FuncionesGenerales {
     public static void  eliminarInstitucion(Contenedor contenedor1, Contenedor relacionesP_I, Contenedor relacionesI_C){
         Scanner c = new Scanner(System.in);
         while (true){
+          try{
             System.out.print("Ingrese el # de Institución a eliminar o -1 para cancelar: ");
-            int select = c.nextInt();
+            int select = Integer.parseInt(c.nextLine()) ;
             if (select==-1) {
                 break;
             }else if(contenedor1.leerObjeto(select)!=null){
@@ -137,14 +151,18 @@ public class FuncionesGenerales {
                                                                         
                 break;
             }
+          } catch (NumberFormatException e) {
+		System.out.println(ENTEROALERTA);
+            }
         }
     }
     
     public static void  eliminarCiudad(Contenedor contenedor1, Contenedor relacionesP_C, Contenedor relacionesI_C, Contenedor relacionesC_P){
         Scanner c = new Scanner(System.in);
         while (true){
+          try{
             System.out.print("Ingrese el # de Ciudad a eliminar o -1 para cancelar: ");
-            int select = c.nextInt();
+            int select = Integer.parseInt(c.nextLine()) ;
             if (select==-1) {
                 break;
             }else if(contenedor1.leerObjeto(select)!=null){
@@ -170,6 +188,9 @@ public class FuncionesGenerales {
                                                                         
                 break;
             }
+          } catch (NumberFormatException e) {
+		System.out.println(ENTEROALERTA);
+            }
         }
     }
     
@@ -177,8 +198,9 @@ public class FuncionesGenerales {
     public static void  eliminarPais(Contenedor contenedor1, Contenedor relacionesC_P){
         Scanner c = new Scanner(System.in);
         while (true){
+          try{
             System.out.print("Ingrese el # de Pais a eliminar o -1 para cancelar: ");
-            int select = c.nextInt();
+            int select = Integer.parseInt(c.nextLine()) ;
             if (select==-1) {
                 break;
             }else if(contenedor1.leerObjeto(select)!=null){
@@ -201,6 +223,9 @@ public class FuncionesGenerales {
                     }
                                                                         
                 break;
+            }
+          } catch (NumberFormatException e) {
+		System.out.println(ENTEROALERTA);
             }
         }
     }
@@ -257,7 +282,7 @@ public class FuncionesGenerales {
             System.out.print("\nDesea agregar relacion? (S/N): ");
             }else{
                 System.out.println("ATENCION!! La relacion no puede ser creada. No existen datos en el sistema de una o ambas entidades a relacionar");
-                System.out.println("Asegurese de agregar datos de las entidades previamente antes de crear una relacion ");
+                System.out.println("Asegurese de agregar datos de las entidades previamente antes de crear una relacion");
                 break;
             }
         }
@@ -278,7 +303,7 @@ public class FuncionesGenerales {
 			break;
 		    }
 		}catch(NumberFormatException e){
-		    System.out.println("¡ALERTA! Debe ingresar un numero ENTERO");
+		    System.out.println(ENTEROALERTA);
 		}
             }                                               
         
