@@ -13,9 +13,14 @@ import java.io.ObjectOutputStream;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.io.BufferedWriter;
+import java.nio.file.Files;
+
 
 public class Main{
-	public static void main(String[] args) throws ClassNotFoundException, FileNotFoundException {
+	public static void main(String[] args) throws ClassNotFoundException, FileNotFoundException, IOException {
             
             //PERSONAS APERTURA
             Contenedor personas;
@@ -26,8 +31,9 @@ public class Main{
             Contenedor relacionesP_C;//Contenedor de relaciones: persona-ciudad
             Contenedor relacionesI_C;//Contenedor de relaciones: institucion-ciudad
             Contenedor relacionesC_P;//Contenedor de relaciones: ciudad-pais
-            String ENTEROALERTA ="¡ALERTA! # debe ser un numero entero...\nIntente de nuevo...";
+            String ENTEROALERTA ="¡ALERTA! # debe ser un numero entero...\nIntente de nuevo...";        
             Scanner c = new Scanner(System.in);
+            
             try {
                 FileInputStream p = new FileInputStream("Personas.bin");
                 FileInputStream i = new FileInputStream("Instituciones.bin");
@@ -360,7 +366,7 @@ public class Main{
                                                 if(!personas.esVacio()){
                                                     System.out.println("--------------------------------------------------");
                                                     System.out.println("# :: ID - Nombre - Direccion");
-                                                    instituciones.listarObjetos(true);
+                                                    instituciones.listarObjetos(true);                                                                         
                                                     System.out.println("--------------------------------------------------");
                                                     while (true){
                                                         try{
@@ -369,28 +375,53 @@ public class Main{
                                                             if (select==-1) {
                                                                 break;
                                                          }else if(instituciones.leerObjeto(select)!=null){
+                                                                String EXT = ".txt";
+                                                                String FILE = "RPPI("+ManejadorFechas.getFechaActual()+")("+ManejadorFechas.getHoraActual()+")"+EXT;
+                                                                Path z = Paths.get("logs/reportePPI/"+FILE);       
+                                                                BufferedWriter reportePPI = null;     
+                                                                reportePPI = Files.newBufferedWriter(z);
+                                                                
                                                                 Institucion sel = (Institucion)instituciones.leerObjeto(select);
-				
-                                                                //Relacio cids = sel.getAllRelaciones(relacionesI_C, 1);
-				
-                                                                Ciudad city = new Ciudad(sel.getAllRelaciones(relacionesI_C, 1)[0].get_id2(),"");
-                                                                city = (Ciudad)city.buscarObjeto(ciudades);
-                                                                Pais cntry  = new Pais  (city.getAllRelaciones(relacionesC_P,1)[0].get_id2(),"");
-                                                                cntry= (Pais)cntry.buscarObjeto(paises);
+				                                                                
+								Ciudad city;
+                                                                try{
+								    city = new Ciudad(sel.getAllRelaciones(relacionesI_C, 1)[0].get_id2(),"");
+								    city = (Ciudad)city.buscarObjeto(ciudades);
+								}catch(ArrayIndexOutOfBoundsException e){
+								    city = new Ciudad(-1, "No encontrada");
+								}
+								
+								Pais cntry;
+                                                                try{
+								    cntry  = new Pais  (city.getAllRelaciones(relacionesC_P,1)[0].get_id2(),"");
+								    cntry= (Pais)cntry.buscarObjeto(paises);
+								}catch(ArrayIndexOutOfBoundsException e){
+								    cntry  = new Pais(-1,"No Encontrado");
+								}
 				
 				
                                 
                                                                 Relacion [] rels = sel.getAllRelaciones(relacionesP_I, 2);
                                                                 System.out.println();
                                                                 System.out.println("Institucion: "+sel.get_nombre()+"          Ciudad: "+city.get_nombre()+"         Pais: "+cntry.get_nombre());
+                                                                reportePPI.write("Institucion: "+sel.get_nombre()+"          Ciudad: "+city.get_nombre()+"         Pais: "+cntry.get_nombre());
+                                                                reportePPI.newLine();
                                                                 System.out.println("Personas Relacionadas");
+                                                                reportePPI.write("Personas Relacionadas");
+                                                                reportePPI.newLine();reportePPI.newLine();
+                                                                
 								System.out.println();
                                                                 System.out.println("Identificador - Nombre - Direccion");
+                                                                reportePPI.write("Identificador - Nombre - Direccion");
+                                                                reportePPI.newLine();
                                                                 for (Relacion r : rels) {
                                                                 Persona person = new Persona(r.get_id1(),"","");
                                                                 person = (Persona)(person.buscarObjeto(personas));
                                                                 System.out.println(person);
+                                                                reportePPI.write(person.toString());
+                                                                reportePPI.newLine();
                                                                 }
+                                                                reportePPI.close();
                                                             break;
                                                            }
                                                         } catch (NumberFormatException e) {
@@ -403,32 +434,75 @@ public class Main{
                                            break; case 2:
                                             //Reportes de institucion por persona 
                                                 System.out.println("2)Reporte de Institucion por Persona"); 
-                                             if(!personas.esVacio()){
-                                                System.out.println("--------------------------------------------------");
-                                                System.out.println("# :: ID - Nombre - Direccion");
-                                                personas.listarObjetos(true);
-                                                System.out.println("--------------------------------------------------");
-                                                    while (true){
-                                                    try{
-                                                        System.out.print("Ingrese el # de Persona para generar reporte o -1 para cancelar: ");
-                                                        int select = Integer.parseInt(c.nextLine()) ;
-                                                        if (select==-1) {
-                                                            break;
-                                                        }else if(personas.leerObjeto(select)!=null){
-							    Persona sel = (Persona)personas.leerObjeto(select);
-                                                            Relacion [] e = sel.getAllRelaciones(relacionesP_I, 1);
-							    for (Relacion r : e) {
-								
-							    }
-                                                        break;
-                                                        }
-                                                    } catch (NumberFormatException e) {
+                                                if (!personas.esVacio()) {
+                                                    System.out.println("--------------------------------------------------");
+                                                    System.out.println("# :: ID - Nombre - Direccion");
+                                                    personas.listarObjetos(true);   
+                                                    System.out.println("--------------------------------------------------");
+                                                    while (true) {
+                                                        try {
+                                                            System.out.print("Ingrese el # de Persona para generar reporte o -1 para cancelar: ");
+                                			    int select = Integer.parseInt(c.nextLine());
+                                                            if (select == -1) {
+                                                                break;
+                                                            } else if (personas.leerObjeto(select) != null) {
+                                                                String EXT = ".txt";
+                                                                String FILE = "RIPP("+ManejadorFechas.getFechaActual()+")("+ManejadorFechas.getHoraActual()+")"+EXT;
+                                                                Path z = Paths.get("logs/reporteIPP/"+FILE);       
+                                                                BufferedWriter reporteIPP = null;     
+                                                                reporteIPP = Files.newBufferedWriter(z);
+                                                                
+                                                                Persona sel = (Persona) personas.leerObjeto(select);
+                                                                Relacion[] e = sel.getAllRelaciones(relacionesP_I, 1);
+				
+                                                                System.out.println();
+                                                                System.out.println("Persona: "+sel.get_nombre());
+                                                                reporteIPP.write("Persona: "+sel.get_nombre());
+                                                                reporteIPP.newLine();
+                                                                System.out.println("Instituciones Relacionadas");
+                                                                reporteIPP.write("Instituciones Relacionadas");
+                                                                reporteIPP.newLine(); reporteIPP.newLine();
+                                                                System.out.println();   
+                                                                System.out.println("Identificador - Nombre - Ciudad - Pais");
+                                                                reporteIPP.write("Identificador - Nombre - Ciudad - Pais");
+                                                                reporteIPP.newLine();
+                                                                for (Relacion r : e) {
+                                                                    Institucion asoc = new Institucion(r.get_id2(),"");
+                                                                    asoc = (Institucion)asoc.buscarObjeto(instituciones);
+                                                                    Relacion [] relciuds =  asoc.getAllRelaciones(relacionesI_C, 1);
+                                                                    if (relciuds.length>1) {
+                                                                        for (Relacion relciud : relciuds) {
+                                                                            Ciudad cidl = new Ciudad(relciud.get_id2(),"");
+                                                                            cidl=(Ciudad)cidl.buscarObjeto(ciudades);
+                                                                            Relacion [] paish = cidl.getAllRelaciones(relacionesC_P, 1);
+                                                                            if (paish.length!=0) {
+                                                                                Pais paisl = new Pais(paish[0].get_id2(),"");
+                                                                                paisl=(Pais)paisl.buscarObjeto(paises);
+                                                                                System.out.println(asoc+" - "+cidl.get_nombre()+" - "+paisl.get_nombre());
+                                                                                reporteIPP.write(asoc+" - "+cidl.get_nombre()+" - "+paisl.get_nombre());
+                                                                                reporteIPP.newLine();
+                                                                            }else{
+                                                                                System.out.println(asoc+" - "+cidl.get_nombre()+" - No encontrado");
+                                                                                reporteIPP.write(asoc+" - "+cidl.get_nombre()+" - No encontrado");
+                                                                                reporteIPP.newLine();
+                                                                            }
+                                                                        }
+                                                                    }else{
+                                                                        System.out.println(asoc+" - No Encontrado - No Encontrado");
+                                                                        reporteIPP.write(asoc+" - No Encontrado - No Encontrado");
+                                                                        reporteIPP.newLine();
+                                                                    }
+                                                                }
+                                                                reporteIPP.close();
+                                                                break;
+                                                            }
+                                                        } catch (NumberFormatException e) {
                                                             System.out.println(ENTEROALERTA);
-                                                    }  
-                                                 }
-                                              }else{
-                                                  System.out.println("Vacio...");
-                                              }
+                                                        }
+                                                    }
+                                                } else {
+                                                    System.out.println("Vacio...");
+                                                }
                                             break; case 3:
                                             //Reporte de instituciones por pais
                                                  System.out.println("3)Reporte de Institucion por Pais"); 
@@ -444,11 +518,39 @@ public class Main{
                                                         if (select==-1) {
                                                             break;
                                                         }else if(paises.leerObjeto(select)!=null){
+                                                            String EXT = ".txt";
+                                                            String FILE = "RIPPA("+ManejadorFechas.getFechaActual()+")("+ManejadorFechas.getHoraActual()+")"+EXT;
+                                                            Path z = Paths.get("logs/reporteIPPA/"+FILE);       
+                                                            BufferedWriter reporteIPPA = null;     
+                                                            reporteIPPA = Files.newBufferedWriter(z);
+                                                            
 							    Pais sel = (Pais)paises.leerObjeto(select);
-                                                            Relacion [] e = sel.getAllRelaciones(relacionesC_P, 2);
-							    for (Relacion r : e) {
-								
+                                                            Relacion [] rels = sel.getAllRelaciones(relacionesC_P, 2);
+							    System.out.println();
+							    System.out.println("Pais: "+sel.get_nombre());
+                                                            reporteIPPA.write("Pais: "+sel.get_nombre());
+                                                            reporteIPPA.newLine();
+							    System.out.println("Instituciones Relacionadas");
+                                                            reporteIPPA.write("Instituciones Relacionadas");
+                                                            reporteIPPA.newLine(); reporteIPPA.newLine();
+							    System.out.println();
+							    System.out.println("Identificador - Nombre - Ciudad");
+                                                            reporteIPPA.write("Identificador - Nombre - Ciudad");
+                                                            reporteIPPA.newLine();
+                                                            
+							    for (Relacion r : rels) {
+								Ciudad cit = new Ciudad(r.get_id1(),"");
+								cit = (Ciudad)cit.buscarObjeto(ciudades);
+								Relacion [] instRels = cit.getAllRelaciones(relacionesI_C, 2);
+								for (Relacion f : instRels) {
+								    Institucion m = new Institucion(f.get_id1(), "");
+								    m = (Institucion)m.buscarObjeto(instituciones);
+								    System.out.println(m+" - "+cit.get_nombre());
+                                                                    reporteIPPA.write(m+" - "+cit.get_nombre());
+								    reporteIPPA.newLine();
+								}
 							    }
+                                                            reporteIPPA.close();
                                                         break;
                                                         }
                                                     } catch (NumberFormatException e) {
@@ -473,18 +575,33 @@ public class Main{
                                                         if (select==-1) {
                                                             break;
                                                         }else if(ciudades.leerObjeto(select)!=null){
+                                                            String EXT = ".txt";
+                                                            String FILE = "RIPC("+ManejadorFechas.getFechaActual()+")("+ManejadorFechas.getHoraActual()+")"+EXT;
+                                                            Path z = Paths.get("logs/reporteIPC/"+FILE);       
+                                                            BufferedWriter reporteIPC = null;     
+                                                            reporteIPC = Files.newBufferedWriter(z);
+                                                                
 							    Ciudad sel = (Ciudad)ciudades.leerObjeto(select);
                                                             Relacion [] e = sel.getAllRelaciones(relacionesI_C, 2);
 							    System.out.println();
 							    System.out.println("Ciudad: " + sel.get_nombre());
+                                                            reporteIPC.write("Ciudad: " + sel.get_nombre());
+                                                            reporteIPC.newLine();
 							    System.out.println("Instituciones Relacionadas");
+                                                            reporteIPC.write("Instituciones Relacionadas");
+                                                            reporteIPC.newLine(); reporteIPC.newLine();
 							    System.out.println();
 							    System.out.println("Identificador - Nombre");
+                                                            reporteIPC.write("Identificador - Nombre");
+                                                            reporteIPC.newLine();
 							    for (Relacion r : e) {
 								Institucion inst = new Institucion(r.get_id1(), "");
 								inst = (Institucion) (inst.buscarObjeto(instituciones));
 								System.out.println(inst);
+                                                                reporteIPC.write(inst.toString());
+                                                                reporteIPC.newLine();
 							    }
+                                                            reporteIPC.close();
                                                         break;
                                                         }
                                                     } catch (NumberFormatException e) {

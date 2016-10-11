@@ -18,7 +18,7 @@ import java.util.logging.Logger;
  *
  * @author Antonio
  */
-public class TestReporte3 {
+public class TestReporte2 {
     public static void main(String[] args) throws FileNotFoundException, IOException, ClassNotFoundException {
     	//PERSONAS APERTURA
             Contenedor personas;
@@ -110,47 +110,57 @@ public class TestReporte3 {
 		String ENTEROALERTA ="¡ALERTA! # debe ser un numero entero...\nIntente de nuevo...";
 		
   
-                                            //Reporte de instituciones por pais
-                                                 System.out.println("3)Reporte de Institucion por Pais"); 
-                                             if(!paises.esVacio()){
-                                                System.out.println("--------------------------------------------------");
-                                                System.out.println("# :: ID - Nombre - Direccion");
-                                                paises.listarObjetos(true);
-                                                System.out.println("--------------------------------------------------");
-                                                    while (true){
-                                                    try{
-                                                        System.out.print("Ingrese el # de Pais para generar reporte o -1 para cancelar: ");
-                                                        int select = Integer.parseInt(c.nextLine()) ;
-                                                        if (select==-1) {
-                                                            break;
-                                                        }else if(paises.leerObjeto(select)!=null){
-							    Pais sel = (Pais)paises.leerObjeto(select);
-                                                            Relacion [] rels = sel.getAllRelaciones(relacionesC_P, 2);
-							    System.out.println();
-							    System.out.println("Pais: "+sel.get_nombre());
-							    System.out.println("Instituciones Relacionadas");
-							    System.out.println();
-							    System.out.println("Identificador - Nombre - Ciudad");
-							    for (Relacion r : rels) {
-								Ciudad cit = new Ciudad(r.get_id1(),"");
-								cit = (Ciudad)cit.buscarObjeto(ciudades);
-								Relacion [] instRels = cit.getAllRelaciones(relacionesI_C, 2);
-								for (Relacion f : instRels) {
-								    Institucion m = new Institucion(f.get_id1(), "");
-								    m = (Institucion)m.buscarObjeto(instituciones);
-								    System.out.println(m+" - "+cit.get_nombre());
-								}
-							    }
-                                                        break;
-                                                        }
-                                                    } catch (NumberFormatException e) {
-                                                            System.out.println(ENTEROALERTA);
-                                                    }  
-                                                 }
-                                              }else{
-                                                  System.out.println("Vacio...");
-                                              }
-		
+		if (!personas.esVacio()) {
+		    System.out.println("--------------------------------------------------");
+		    System.out.println("# :: ID - Nombre - Direccion");
+		    personas.listarObjetos(true);
+		    System.out.println("--------------------------------------------------");
+		    while (true) {
+			try {
+			    System.out.print("Ingrese el # de Persona para generar reporte o -1 para cancelar: ");
+			    int select = Integer.parseInt(c.nextLine());
+			    if (select == -1) {
+				break;
+			    } else if (personas.leerObjeto(select) != null) {
+				
+				Persona sel = (Persona) personas.leerObjeto(select);
+				Relacion[] e = sel.getAllRelaciones(relacionesP_I, 1);
+				
+				System.out.println();
+				System.out.println("Persona: "+sel.get_nombre());
+				System.out.println("Instituciones Relacionadas");
+				System.out.println();
+				System.out.println("Identificador - Nombre - Ciudad - Pais");
+				for (Relacion r : e) {
+				    Institucion asoc = new Institucion(r.get_id2(),"");
+				    asoc = (Institucion)asoc.buscarObjeto(instituciones);
+				    Relacion [] relciuds =  asoc.getAllRelaciones(relacionesI_C, 1);
+				    if (relciuds.length>1) {
+					for (Relacion relciud : relciuds) {
+					    Ciudad cidl = new Ciudad(relciud.get_id2(),"");
+					    cidl=(Ciudad)cidl.buscarObjeto(ciudades);
+					    Relacion [] paish = cidl.getAllRelaciones(relacionesC_P, 1);
+					    if (paish.length!=0) {
+						Pais paisl = new Pais(paish[0].get_id2(),"");
+						paisl=(Pais)paisl.buscarObjeto(paises);
+						System.out.println(asoc+" - "+cidl.get_nombre()+" - "+paisl.get_nombre());
+					    }else{
+						System.out.println(asoc+" - "+cidl.get_nombre()+" - No encontrado");
+					    }
+					}
+				    }else{
+					System.out.println(asoc+" - No Encontrado - No Encontrado");
+				    }
+				}
+				break;
+			    }
+			} catch (NumberFormatException e) {
+			    System.out.println(ENTEROALERTA);
+			}
+		    }
+		} else {
+		    System.out.println("Vacio...");
+		}		
 		
 		
                 } catch (FileNotFoundException ex) {

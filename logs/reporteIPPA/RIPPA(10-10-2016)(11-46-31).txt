@@ -1,0 +1,16 @@
+Pais: Honduras
+Instituciones Relacionadas
+
+Identificador - Nombre - Ciudad
+2 - Hondutel - Tegucigalpa
+3 - Claro - Tegucigalpa
+4 - Banco - Tegucigalpa
+2 - Hondutel - San Pedro Sula
+3 - Claro - San Pedro Sula
+4 - Banco - San Pedro Sula
+2 - Hondutel - La Ceiba
+3 - Claro - La Ceiba
+4 - Banco - La Ceiba
+2 - Hondutel - Choluteca
+3 - Claro - Choluteca
+4 - Banco - Choluteca

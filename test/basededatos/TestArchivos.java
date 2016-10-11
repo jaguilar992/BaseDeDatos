@@ -8,7 +8,6 @@ package basededatos;
 import utiles.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-//import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -19,20 +18,18 @@ import java.nio.file.Files;
  */
 public class TestArchivos  {
    public static void main(String args[])throws IOException{
-       String title = "RPPI";
+       String title1 = "RPPI";
        String EXT = ".txt";
-       String FILE = title+"("+ManejadorFechas.getFechaActual()+")("+ManejadorFechas.getHoraActual()+")"+EXT;
+       String FILE = title1+"("+ManejadorFechas.getFechaActual()+")("+ManejadorFechas.getHoraActual()+")"+EXT;
        
        Path p = Paths.get("logs/"+FILE);
        
        BufferedWriter reporteRPPI = null;
        
-       try{
-           reporteRPPI = Files.newBufferedWriter(p);
+      
+       reporteRPPI = Files.newBufferedWriter(p);
        
-       }catch(IOException e){
-           reporteRPPI = Files.newBufferedWriter(p);
-       }
+      
        
        
        
