@@ -3,5 +3,6 @@ Menu Instituciones
 Menu Ciudades
 Menu Paises
 Menu Relaciones
+Menu Reportes
 Guardar cambios
 Salir

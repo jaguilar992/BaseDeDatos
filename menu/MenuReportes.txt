@@ -1,0 +1,5 @@
+Reporte de Personas por Institucion
+Reporte de Instituciones por Persona
+Reporte de Instituciones por Pais
+Reporte de Instituciones por Ciudad
+Volve al Menu Anterior
