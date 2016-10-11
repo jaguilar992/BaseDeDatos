@@ -1,7 +1,0 @@
-Pais: Brasil
-Instituciones Relacionadas
-
-Identificador - Nombre - Ciudad
-3 - Claro - Villa Nueva
-4 - Banco - Santa Maria
-3 - Claro - Cerro Viejo

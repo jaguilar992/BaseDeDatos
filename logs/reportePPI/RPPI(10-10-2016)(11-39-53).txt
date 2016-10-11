@@ -1,9 +1,0 @@
-Institucion: UNAH          Ciudad: Tegucigalpa         Pais: Honduras
-Personas Relacionadas
-
-Identificador - Nombre - Direccion
-1 - Juan Perez - Tegucigalpa
-2 - Luis Mejia - Tegucigalpa
-4 - Juan Salinas - Choluteca
-9 - Rodrigo Paredes - Juticalpa
-15 - Samir Abdul - Teheran
