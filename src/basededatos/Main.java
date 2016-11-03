@@ -470,7 +470,7 @@ public class Main{
                                                                     Institucion asoc = new Institucion(r.get_id2(),"");
                                                                     asoc = (Institucion)asoc.buscarObjeto(instituciones);
                                                                     Relacion [] relciuds =  asoc.getAllRelaciones(relacionesI_C, 1);
-                                                                    if (relciuds.length>1) {
+                                                                    if (relciuds.length!=1) {
                                                                         for (Relacion relciud : relciuds) {
                                                                             Ciudad cidl = new Ciudad(relciud.get_id2(),"");
                                                                             cidl=(Ciudad)cidl.buscarObjeto(ciudades);
